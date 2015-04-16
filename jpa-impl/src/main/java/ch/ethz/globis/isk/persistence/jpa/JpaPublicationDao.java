@@ -5,7 +5,10 @@ import ch.ethz.globis.isk.domain.jpa.JpaPublication;
 import ch.ethz.globis.isk.persistence.PublicationDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +44,7 @@ public class JpaPublicationDao extends JpaDao<String, Publication> implements Pu
 
     @Override
     public Double getAverageNumberOfAuthors() {
-    	return null;
+    	return Comparators.getAverageNumberOfAuthors(this);
     }
 
     @Override

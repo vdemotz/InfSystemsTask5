@@ -5,13 +5,18 @@ import ch.ethz.globis.isk.domain.mongo.MongoPublication;
 import ch.ethz.globis.isk.persistence.PublicationDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import com.mongodb.*;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Repository
@@ -36,7 +41,7 @@ public class MongoPublicationDao extends MongoDao<String, Publication> implement
 
     @Override
     public Double getAverageNumberOfAuthors() {
-    	return null;
+    	return Comparators.getAverageNumberOfAuthors(this);
     }
 
     @Override

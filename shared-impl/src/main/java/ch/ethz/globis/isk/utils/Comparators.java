@@ -5,6 +5,7 @@ import ch.ethz.globis.isk.domain.JournalEdition;
 import ch.ethz.globis.isk.domain.Person;
 import ch.ethz.globis.isk.domain.Publication;
 import ch.ethz.globis.isk.persistence.PersonDao;
+import ch.ethz.globis.isk.persistence.PublicationDao;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -81,5 +82,14 @@ public class Comparators {
     		set.addAll(p.getEditors());
     	}
     	return set;
+    }
+    
+    public static Double getAverageNumberOfAuthors(PublicationDao pubDao) {
+    	Iterable<Publication> publications = pubDao.findAll();
+    	Double numbAuthors = new Double(0);
+    	for (Publication p : publications) {
+    		numbAuthors += p.getAuthors().size();
+    	}
+    	return numbAuthors / pubDao.count();
     }
 }

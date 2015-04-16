@@ -5,7 +5,10 @@ import ch.ethz.globis.isk.domain.db4o.Db4oPublication;
 import ch.ethz.globis.isk.persistence.PublicationDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import org.springframework.stereotype.Repository;
+
 import java.util.*;
 
 @Repository
@@ -30,7 +33,7 @@ public class Db4oPublicationDao extends Db4oDao<String, Publication> implements 
 
     @Override
     public Double getAverageNumberOfAuthors() {
-    	return null;
+    	return Comparators.getAverageNumberOfAuthors(this);
     }
 
     @Override
