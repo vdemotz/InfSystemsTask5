@@ -28,7 +28,7 @@ public class Db4oPublicationDao extends Db4oDao<String, Publication> implements 
 
     @Override
     public Map<Long, Long> countPerYears(Long startYear, Long endYear) {
-    	return null;
+    	return Comparators.countPerYear(this, startYear, endYear);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class JpaPublicationDao extends JpaDao<String, Publication> implements Pu
 
     @Override
     public Map<Long, Long> countPerYears(Long startYear, Long endYear) {
-    	return null;
+    	return Comparators.countPerYear(this, startYear, endYear);
     }
 
     @Override

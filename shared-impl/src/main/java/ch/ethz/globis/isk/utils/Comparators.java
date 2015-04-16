@@ -6,9 +6,13 @@ import ch.ethz.globis.isk.domain.Person;
 import ch.ethz.globis.isk.domain.Publication;
 import ch.ethz.globis.isk.persistence.PersonDao;
 import ch.ethz.globis.isk.persistence.PublicationDao;
+import ch.ethz.globis.isk.util.Filter;
+import ch.ethz.globis.isk.util.Operator;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Comparators {
@@ -91,5 +95,15 @@ public class Comparators {
     		numbAuthors += p.getAuthors().size();
     	}
     	return numbAuthors / pubDao.count();
+    }
+    
+    public static Map<Long, Long> countPerYear(PublicationDao pubDao, Long startYear, Long endYear) {
+    	Map<Long, Long> map = new HashMap<Long, Long>();
+    	for (Long year = startYear;year <= endYear; year++) {
+    		Map<String, Filter> filterMap = new HashMap<>();
+    		filterMap.put("year", new Filter(Operator.EQUAL, year));
+    		map.put(year, new Long(pubDao.countAllByFilter(filterMap)));
+    	}
+    	return map;
     }
 }
