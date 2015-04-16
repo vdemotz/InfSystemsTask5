@@ -5,7 +5,10 @@ import ch.ethz.globis.isk.domain.db4o.Db4oPerson;
 import ch.ethz.globis.isk.persistence.PersonDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import org.springframework.stereotype.Repository;
+
 import java.util.*;
 
 @Repository
@@ -30,7 +33,7 @@ public class Db4oPersonDao extends Db4oDao<String, Person> implements PersonDao 
 
     @Override
     public Long computeAuthorDistance(String firstId, String secondId) {
-    	return null;
+    	return Comparators.searchBreadthFirstCoAuthors(this, this.findOne(firstId), this.findOne(secondId));
     }
 
     @Override

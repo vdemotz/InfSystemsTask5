@@ -5,7 +5,10 @@ import ch.ethz.globis.isk.domain.jpa.JpaPerson;
 import ch.ethz.globis.isk.persistence.PersonDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import org.springframework.stereotype.Repository;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -37,7 +40,7 @@ public class JpaPersonDao extends JpaDao<String, Person> implements PersonDao {
 
     @Override
     public Long computeAuthorDistance(String firstId, String secondId) {
-    	return null;
+    	return Comparators.searchBreadthFirstCoAuthors(this, this.findOne(firstId), this.findOne(secondId));
     }
 
     private Set<Person> getCoauthors(Person person) {

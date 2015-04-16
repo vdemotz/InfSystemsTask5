@@ -2,9 +2,13 @@ package ch.ethz.globis.isk.utils;
 
 import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.JournalEdition;
+import ch.ethz.globis.isk.domain.Person;
 import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.persistence.PersonDao;
 
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Comparators {
 
@@ -53,5 +57,21 @@ public class Comparators {
                 }
             }
         };
+    }
+    
+    public static Long searchBreadthFirstCoAuthors(PersonDao personDao, Person departure, Person target) {
+    	Long distance = new Long(0);
+    	Set<Person> set = new HashSet<Person>();
+    	set.add(departure);
+    	while(!set.contains(target)) {
+    		distance++;
+    		for (Person p : set) {
+    			Set<Person> coauthors = personDao.getCoauthors(p.getId());
+    			for (Person coA : coauthors) {
+    				set.add(coA);
+    			}
+    		}
+    	}
+    	return distance;
     }
 }
