@@ -35,15 +35,11 @@ public class JpaPersonDao extends JpaDao<String, Person> implements PersonDao {
 
     @Override
     public Set<Person> getCoauthors(String id) {
-    	return null;
+    	return Comparators.getCoAuthors(this.findOne(id));
     }
 
     @Override
     public Long computeAuthorDistance(String firstId, String secondId) {
     	return Comparators.searchBreadthFirstCoAuthors(this, this.findOne(firstId), this.findOne(secondId));
-    }
-
-    private Set<Person> getCoauthors(Person person) {
-    	return null;
     }
 }

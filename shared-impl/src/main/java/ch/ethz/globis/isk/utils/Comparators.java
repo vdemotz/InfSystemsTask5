@@ -66,12 +66,20 @@ public class Comparators {
     	while(!set.contains(target)) {
     		distance++;
     		for (Person p : set) {
-    			Set<Person> coauthors = personDao.getCoauthors(p.getId());
-    			for (Person coA : coauthors) {
-    				set.add(coA);
-    			}
+    			set.addAll(personDao.getCoauthors(p.getId()));
     		}
     	}
     	return distance;
+    }
+    
+    public static Set<Person> getCoAuthors(Person author) {
+    	Set<Person> set = new HashSet<Person>();
+    	Set<Publication> publications = author.getAuthoredPublications();
+    	publications.addAll(author.getEditedPublications());
+    	for (Publication p : publications) {
+    		set.addAll(p.getAuthors());
+    		set.addAll(p.getEditors());
+    	}
+    	return set;
     }
 }

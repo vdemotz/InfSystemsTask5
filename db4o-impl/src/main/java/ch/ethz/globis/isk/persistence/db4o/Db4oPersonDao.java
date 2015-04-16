@@ -28,7 +28,7 @@ public class Db4oPersonDao extends Db4oDao<String, Person> implements PersonDao 
 
     @Override
     public Set<Person> getCoauthors(String id) {
-    	return null;
+    	return Comparators.getCoAuthors(this.findOne(id));
     }
 
     @Override
@@ -39,9 +39,5 @@ public class Db4oPersonDao extends Db4oDao<String, Person> implements PersonDao 
     @Override
     public Class getStoredClass() {
         return Db4oPerson.class;
-    }
-
-    private Set<Person> getCoauthors(Person person) {
-    	return null;
     }
 }

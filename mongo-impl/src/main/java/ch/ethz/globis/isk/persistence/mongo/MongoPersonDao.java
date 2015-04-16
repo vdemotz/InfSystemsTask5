@@ -23,7 +23,7 @@ public class MongoPersonDao extends MongoDao<String, Person> implements PersonDa
 
     @Override
     public Set<Person> getCoauthors(String id) {
-    	return null;
+    	return Comparators.getCoAuthors(this.findOne(id));
     }
 
     @Override
