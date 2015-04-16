@@ -39,11 +39,11 @@ public class PublicationServiceImpl extends BaseServiceImpl<String, Publication>
     }
 
     public Map<Long, Long> countPerYears(Long startYear, Long endYear) {
-    	return null;
+    	return publicationDao.countPerYears(startYear, endYear);
     }
 
     public Double averageNumberOfAuthors() {
-    	return null;
+    	return publicationDao.getAverageNumberOfAuthors();
     }
 
     @Override

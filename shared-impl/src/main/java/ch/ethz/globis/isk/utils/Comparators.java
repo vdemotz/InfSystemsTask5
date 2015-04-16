@@ -1,5 +1,6 @@
 package ch.ethz.globis.isk.utils;
 
+import ch.ethz.globis.isk.domain.Conference;
 import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.JournalEdition;
@@ -13,10 +14,10 @@ import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Comparators {
 
@@ -73,9 +74,11 @@ public class Comparators {
     	set.add(departure);
     	while(!set.contains(target)) {
     		distance++;
+    		Set<Person> addedSet = new HashSet<Person>();
     		for (Person p : set) {
-    			set.addAll(personDao.getCoauthors(p.getId()));
+    			addedSet.addAll(personDao.getCoauthors(p.getId()));
     		}
+    		set.addAll(addedSet);
     	}
     	return distance;
     }
@@ -88,6 +91,7 @@ public class Comparators {
     		set.addAll(p.getAuthors());
     		set.addAll(p.getEditors());
     	}
+    	set.remove(author);
     	return set;
     }
     
@@ -95,15 +99,17 @@ public class Comparators {
     	Iterable<Publication> publications = pubDao.findAll();
     	Double numbAuthors = new Double(0);
     	for (Publication p : publications) {
-    		numbAuthors += p.getAuthors().size();
+    		Set<Person> set = p.getAuthors();
+    		set.addAll(p.getEditors());
+    		numbAuthors += set.size();
     	}
     	return numbAuthors / pubDao.count();
     }
     
     public static Map<Long, Long> countPerYear(PublicationDao pubDao, Long startYear, Long endYear) {
-    	Map<Long, Long> map = new HashMap<Long, Long>();
+    	Map<Long, Long> map = new TreeMap<Long, Long>();
     	for (Long year = startYear;year <= endYear; year++) {
-    		Map<String, Filter> filterMap = new HashMap<>();
+    		Map<String, Filter> filterMap = new TreeMap<>();
     		filterMap.put("year", new Filter(Operator.EQUAL, year));
     		map.put(year, new Long(pubDao.countAllByFilter(filterMap)));
     	}
@@ -112,7 +118,7 @@ public class Comparators {
     
     public static Set<Publication> findPublicationsForConference(ConferenceDao confDao, String confId) {
     	Set<Publication> set = new HashSet<Publication>();
-    	Set<ConferenceEdition> setConfEd = confDao.findOneByName(confId).getEditions();
+    	Set<ConferenceEdition> setConfEd = confDao.findOne(confId).getEditions();
     	for (ConferenceEdition confEd : setConfEd) {
     		Proceedings proc = confEd.getProceedings();
     		Set<InProceedings> inProcSet = proc.getPublications();
@@ -124,7 +130,7 @@ public class Comparators {
     
     public static Set<Person> findAuthorsForConference(ConferenceDao confDao, String confId) {
     	Set<Person> set = new HashSet<Person>();
-    	Set<ConferenceEdition> setConfEd = confDao.findOneByName(confId).getEditions();
+    	Set<ConferenceEdition> setConfEd = confDao.findOne(confId).getEditions();
     	for (ConferenceEdition confEd : setConfEd) {
     		Proceedings proc = confEd.getProceedings();
     		set.addAll(proc.getEditors());

@@ -40,11 +40,11 @@ public class PersonServiceImpl extends BaseServiceImpl<String, Person> implement
     }
 
     public Set<Person> getCoauthors(String id) {
-    	return null;
+    	return personDao.getCoauthors(id);
     }
 
     public Long computeAuthorDistance(String firstId, String secondId) {
-    	return null;
+    	return personDao.computeAuthorDistance(firstId, secondId);
     }
 
     @Override

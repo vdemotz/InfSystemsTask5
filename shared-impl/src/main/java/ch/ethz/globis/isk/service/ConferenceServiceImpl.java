@@ -55,10 +55,10 @@ public class ConferenceServiceImpl extends BaseServiceImpl<String, Conference> i
     }
 
     public Long countAuthorsForConference(String conferenceId) {
-    	return null;
+    	return conferenceDao.countAuthorsForConference(conferenceId);
     }
 
     public Long countPublicationsForConference(String conferenceId) {
-    	return null;
+    	return conferenceDao.countPublicationsForConference(conferenceId);
     }
 }
