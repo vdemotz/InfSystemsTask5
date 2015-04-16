@@ -89,7 +89,6 @@ public class Comparators {
     	publications.addAll(author.getEditedPublications());
     	for (Publication p : publications) {
     		set.addAll(p.getAuthors());
-    		set.addAll(p.getEditors());
     	}
     	set.remove(author);
     	return set;
@@ -103,7 +102,8 @@ public class Comparators {
     		set.addAll(p.getEditors());
     		numbAuthors += set.size();
     	}
-    	return numbAuthors / pubDao.count();
+    	System.err.println("Average "+numbAuthors / new Double(pubDao.count()));
+    	return numbAuthors / new Double(pubDao.count());
     }
     
     public static Map<Long, Long> countPerYear(PublicationDao pubDao, Long startYear, Long endYear) {

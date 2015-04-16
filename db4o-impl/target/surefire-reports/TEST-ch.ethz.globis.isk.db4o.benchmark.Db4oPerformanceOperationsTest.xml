@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="92.935" tests="9" errors="0" skipped="0" failures="2">
+<testsuite name="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="106.541" tests="9" errors="0" skipped="0" failures="2">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_75.jdk/Contents/Home/jre/lib"/>
@@ -62,7 +62,7 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testShortestPathBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="6.079">
+  <testcase name="testShortestPathBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="6.397">
     <failure message="expected:&lt;3&gt; but was:&lt;2&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: expected:<3> but was:<2>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:743)
@@ -100,16 +100,16 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
 ]]></failure>
   </testcase>
-  <testcase name="testFindWithFilterBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="2.603"/>
-  <testcase name="testCountPublicationsForYearIntervalBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="40.217"/>
-  <testcase name="testCountAllPublicationsForConferenceBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.283"/>
-  <testcase name="testFindOrderedByBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="8.993"/>
-  <testcase name="testAverageAuthorsForPublicationBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="32.665">
+  <testcase name="testFindWithFilterBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="3.081"/>
+  <testcase name="testCountPublicationsForYearIntervalBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="40.792"/>
+  <testcase name="testCountAllPublicationsForConferenceBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.281"/>
+  <testcase name="testFindOrderedByBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="8.856"/>
+  <testcase name="testAverageAuthorsForPublicationBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="45.208">
     <failure type="java.lang.AssertionError:">java.lang.AssertionError: null
 	at org.junit.Assert.fail(Assert.java:86)
 	at org.junit.Assert.assertTrue(Assert.java:41)
 	at org.junit.Assert.assertTrue(Assert.java:52)
-	at ch.ethz.globis.isk.test.benchmark.PerformanceOperationsTest.testAverageAuthorsForPublicationBenchmark(PerformanceOperationsTest.java:174)
+	at ch.ethz.globis.isk.test.benchmark.PerformanceOperationsTest.testAverageAuthorsForPublicationBenchmark(PerformanceOperationsTest.java:175)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -140,10 +140,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
 </failure>
-    <system-err>Finally : 148975 and numb authors : 264924.0 average : 1.778311797281423
+    <system-err>Average 1.7645578117133747
+1.7645578117133747
 </system-err>
   </testcase>
-  <testcase name="testFindPublicationById" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.01"/>
-  <testcase name="testCountAllAuthorsForConferenceBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.048"/>
-  <testcase name="testCoauthorsBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="2.037"/>
+  <testcase name="testFindPublicationById" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.008"/>
+  <testcase name="testCountAllAuthorsForConferenceBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="0.017"/>
+  <testcase name="testCoauthorsBenchmark" classname="ch.ethz.globis.isk.db4o.benchmark.Db4oPerformanceOperationsTest" time="1.901"/>
 </testsuite>
