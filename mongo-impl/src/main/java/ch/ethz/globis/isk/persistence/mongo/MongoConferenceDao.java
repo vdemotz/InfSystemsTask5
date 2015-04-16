@@ -6,8 +6,11 @@ import ch.ethz.globis.isk.persistence.ConferenceDao;
 import ch.ethz.globis.isk.persistence.ProceedingsDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
+import ch.ethz.globis.isk.utils.Comparators;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import java.util.*;
 
 @Repository
@@ -25,22 +28,22 @@ public class MongoConferenceDao extends MongoDao<String, Conference> implements 
 
     @Override
     public Long countAuthorsForConference(String confId) {
-    	return null;
+    	return new Long(Comparators.findAuthorsForConference(this, confId).size());
     }
 
     @Override
     public Set<Person> findAuthorsForConference(String confId) {
-    	return null;
+    	return Comparators.findAuthorsForConference(this, confId);
     }
 
     @Override
     public Set<Publication> findPublicationsForConference(String confId) {
-    	return null;
+    	return Comparators.findPublicationsForConference(this, confId);
     }
 
     @Override
     public Long countPublicationsForConference(String confId) {
-    	return null;
+    	return  new Long(Comparators.findPublicationsForConference(this, confId).size());
     }
 
     @Override

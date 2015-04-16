@@ -1,9 +1,12 @@
 package ch.ethz.globis.isk.utils;
 
 import ch.ethz.globis.isk.domain.ConferenceEdition;
+import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.JournalEdition;
 import ch.ethz.globis.isk.domain.Person;
+import ch.ethz.globis.isk.domain.Proceedings;
 import ch.ethz.globis.isk.domain.Publication;
+import ch.ethz.globis.isk.persistence.ConferenceDao;
 import ch.ethz.globis.isk.persistence.PersonDao;
 import ch.ethz.globis.isk.persistence.PublicationDao;
 import ch.ethz.globis.isk.util.Filter;
@@ -105,5 +108,31 @@ public class Comparators {
     		map.put(year, new Long(pubDao.countAllByFilter(filterMap)));
     	}
     	return map;
+    }
+    
+    public static Set<Publication> findPublicationsForConference(ConferenceDao confDao, String confId) {
+    	Set<Publication> set = new HashSet<Publication>();
+    	Set<ConferenceEdition> setConfEd = confDao.findOneByName(confId).getEditions();
+    	for (ConferenceEdition confEd : setConfEd) {
+    		Proceedings proc = confEd.getProceedings();
+    		Set<InProceedings> inProcSet = proc.getPublications();
+    		set.add(proc);
+    		set.addAll(inProcSet);
+    	}
+    	return set;
+    }
+    
+    public static Set<Person> findAuthorsForConference(ConferenceDao confDao, String confId) {
+    	Set<Person> set = new HashSet<Person>();
+    	Set<ConferenceEdition> setConfEd = confDao.findOneByName(confId).getEditions();
+    	for (ConferenceEdition confEd : setConfEd) {
+    		Proceedings proc = confEd.getProceedings();
+    		set.addAll(proc.getEditors());
+    		Set<InProceedings> inProcSet = proc.getPublications();
+    		for (InProceedings inProc : inProcSet) {
+    			set.addAll(inProc.getAuthors());
+    		}
+    	}
+    	return set;
     }
 }
