@@ -102,7 +102,8 @@ public class Comparators {
     		set.addAll(p.getEditors());
     		numbAuthors += set.size();
     	}
-    	System.err.println("Average "+numbAuthors / new Double(pubDao.count()));
+    	System.out.println("NumbAuthors: " + numbAuthors + "; pubDao.count(): " + pubDao.count());
+    	System.err.println("Average "+ new Double(numbAuthors) / new Double(pubDao.count()));
     	return numbAuthors / new Double(pubDao.count());
     }
     

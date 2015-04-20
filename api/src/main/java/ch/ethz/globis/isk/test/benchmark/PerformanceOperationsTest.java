@@ -116,7 +116,7 @@ public class PerformanceOperationsTest {
         assertEquals("Wrong result size", 1, results.size());;
         BenchmarkResult benchmarkResult = results.get(0);
         Long distance = (Long) benchmarkResult.getResult();
-        assertEquals((Long) 3L, distance);
+        assertEquals((Long) 2L, distance);
     }
 
     @Test
@@ -168,7 +168,7 @@ public class PerformanceOperationsTest {
         Benchmark benchmark = newAverageAuthorsForPublicationBenchmark(noInputs());
         List<BenchmarkResult> results = benchmark.run();
         assertNotNull(results);
-        assertEquals("Wrong result size", 1, results.size());;
+        assertEquals("Wrong result size", 1, results.size());
         BenchmarkResult benchmarkResult = results.get(0);
         Double distance = (Double) benchmarkResult.getResult();
         assertTrue(1.773 < distance && distance < 1.774);
