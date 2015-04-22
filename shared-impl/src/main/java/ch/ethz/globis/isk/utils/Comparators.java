@@ -1,6 +1,5 @@
 package ch.ethz.globis.isk.utils;
 
-import ch.ethz.globis.isk.domain.Conference;
 import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.JournalEdition;
@@ -99,11 +98,8 @@ public class Comparators {
     	Double numbAuthors = new Double(0);
     	for (Publication p : publications) {
     		Set<Person> set = p.getAuthors();
-    		set.addAll(p.getEditors());
     		numbAuthors += set.size();
     	}
-    	System.out.println("NumbAuthors: " + numbAuthors + "; pubDao.count(): " + pubDao.count());
-    	System.err.println("Average "+ new Double(numbAuthors) / new Double(pubDao.count()));
     	return numbAuthors / new Double(pubDao.count());
     }
     

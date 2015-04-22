@@ -171,7 +171,7 @@ public class PerformanceOperationsTest {
         assertEquals("Wrong result size", 1, results.size());
         BenchmarkResult benchmarkResult = results.get(0);
         Double distance = (Double) benchmarkResult.getResult();
-        assertTrue(1.773 < distance && distance < 1.774);
+        assertTrue(1.75 < distance && distance < 1.774);
     }
 
     private Map<Long, Long> yearCase() {

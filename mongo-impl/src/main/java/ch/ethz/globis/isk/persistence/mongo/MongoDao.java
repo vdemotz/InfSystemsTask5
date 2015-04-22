@@ -35,7 +35,10 @@ public abstract class MongoDao<K extends Serializable, T extends DomainObject> i
 
     @Override
     public T findOne(K id) {
-        return mongoOperations.findById(id, getStoredClass(), collection());
+    	/*
+    	 * Previously, passed the collection as an argument. 
+    	 */
+        return mongoOperations.findById(id, getStoredClass());
     }
 
     @Override
