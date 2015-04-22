@@ -94,7 +94,7 @@ public class Comparators {
     }
     
     public static Double getAverageNumberOfAuthors(PublicationDao pubDao) {
-    	final int PAGE_SIZE = 1000;
+    	final int PAGE_SIZE = 50000;
     	double numAuthors = 0F;
     	long totalPubs = pubDao.count();
     	for (int i=0; i*PAGE_SIZE <= totalPubs; i++){
