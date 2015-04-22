@@ -1,5 +1,11 @@
 package ch.ethz.globis.isk.utils;
 
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
 import ch.ethz.globis.isk.domain.ConferenceEdition;
 import ch.ethz.globis.isk.domain.InProceedings;
 import ch.ethz.globis.isk.domain.JournalEdition;
@@ -11,12 +17,6 @@ import ch.ethz.globis.isk.persistence.PersonDao;
 import ch.ethz.globis.isk.persistence.PublicationDao;
 import ch.ethz.globis.isk.util.Filter;
 import ch.ethz.globis.isk.util.Operator;
-
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class Comparators {
 
@@ -94,13 +94,17 @@ public class Comparators {
     }
     
     public static Double getAverageNumberOfAuthors(PublicationDao pubDao) {
-    	Iterable<Publication> publications = pubDao.findAll();
-    	Double numbAuthors = new Double(0);
-    	for (Publication p : publications) {
-    		Set<Person> set = p.getAuthors();
-    		numbAuthors += set.size();
+    	final int PAGE_SIZE = 1000;
+    	double numAuthors = 0F;
+    	long totalPubs = pubDao.count();
+    	for (int i=0; i*PAGE_SIZE <= totalPubs; i++){
+    		Iterable<Publication> publications = pubDao.findAllByFilter(null, i*PAGE_SIZE, PAGE_SIZE);
+    		for (Publication p : publications){
+    			Set<Person> set = p.getAuthors();
+    			numAuthors += set.size();
+    		}
     	}
-    	return numbAuthors / new Double(pubDao.count());
+    	return numAuthors / (double)totalPubs;
     }
     
     public static Map<Long, Long> countPerYear(PublicationDao pubDao, Long startYear, Long endYear) {
